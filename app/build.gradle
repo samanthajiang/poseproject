@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+/**
+ * 应用名称，是否重命名 apk
+ */
+def appName = 'FULiveDemo'
+def renameApk = false
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.project.pose"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.namaSdkVersionCode
+        versionName rootProject.ext.namaSdkVersionName
+        manifestPlaceholders = ['appName': appName]
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+    if (renameApk) {
+        // eg: FULiveDemo_7.0.0_debug_20200603_095632.apk
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                def releaseTime = new Date().format("yyyyMMdd_HHmmss", TimeZone.getDefault())
+                outputFileName = "${appName}_${versionName}_${variant.buildType.name}_${releaseTime}.apk"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'me.jessyan:autosize:1.2.1'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':PoseDetection')
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.3'
+}

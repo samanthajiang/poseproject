@@ -1,0 +1,8 @@
+<resources>
+    <string name="main_page_title">PoseProject</string>
+    <string name="config_item_action_recognition">Action</string>
+    <string name="track_status_no_human">Stand Away and Fit Body to the Camera</string>
+    <string name="camera_open_failed">Fail to open camera</string>
+    <string name="camera_preview_failed">Fail to preview camera</string>
+    <string name="camera_close_failed">Fail to close camera</string>
+</resources>

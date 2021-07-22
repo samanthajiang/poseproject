@@ -1,0 +1,40 @@
+package titech.project.pose.renderer;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+
+public abstract class AbstractLifeCycleRenderer implements LifecycleObserver {
+    private Lifecycle mLifecycle;
+
+    protected AbstractLifeCycleRenderer(final Lifecycle lifecycle) {
+        lifecycle.addObserver(this);
+        mLifecycle = lifecycle;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    protected void onStart() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    protected void onResume() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    protected void onPause() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    protected void onStop() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    private void onDestroy() {
+        mLifecycle.removeObserver(this);
+    }
+
+}

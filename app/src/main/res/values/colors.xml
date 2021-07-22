@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary_background">#050F14</color>
+    <color name="main_page_bg">#FF030010</color>
+    <color name="bg_toast">#B3111226</color>
+
+</resources>
